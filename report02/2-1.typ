@@ -47,15 +47,14 @@ manaba からダウンロードした実験用のプログラムを Processing �
   table(
     columns: 2 + 13,
     [条件 (距離)], [条件 (幅)], ..range(0, 13).map(_ => []),
-    [250], [40 ], ..result.at("d250w40"),
-    [250], [90 ], ..result.at("d250w90"),
-    [250], [120], ..result.at("d250w120"),
-    [450], [40 ], ..result.at("d450w40"), 
-    [450], [90 ], ..result.at("d450w90"), 
-    [450], [120], ..result.at("d450w120"),
-    [650], [40 ], ..result.at("d650w40"), 
-    [650], [90 ], ..result.at("d650w90"), 
-    [650], [120], ..result.at("d650w120"),
+    ..{
+      for d in (250, 450, 650) {
+        for w in (40, 90, 120) {
+          let key = "d" + str(d) + "w" + str(w)
+          ([#d], [#w], ..result.at(key))
+        }
+      }
+    }
   ),
   caption: [各条件毎の選択時間]
 ) <t1>
@@ -78,15 +77,14 @@ manaba からダウンロードした実験用のプログラムを Processing �
   table(
     columns: 2 + 2,
     [条件 (距離)], [条件 (幅)], [平均選択時間 MT], [ID],
-    [250], [40 ], [#average(result.at("d250w40")) ], [#calc-id(250, 40 )], 
-    [250], [90 ], [#average(result.at("d250w90")) ], [#calc-id(250, 90 )], 
-    [250], [120], [#average(result.at("d250w120"))], [#calc-id(250, 120)],
-    [450], [40 ], [#average(result.at("d450w40")) ], [#calc-id(450, 40 )], 
-    [450], [90 ], [#average(result.at("d450w90")) ], [#calc-id(450, 90 )], 
-    [450], [120], [#average(result.at("d450w120"))], [#calc-id(450, 120)],
-    [650], [40 ], [#average(result.at("d650w40")) ], [#calc-id(650, 40 )], 
-    [650], [90 ], [#average(result.at("d650w90")) ], [#calc-id(650, 90 )], 
-    [650], [120], [#average(result.at("d650w120"))], [#calc-id(650, 120)],
+    ..{
+      for d in (250, 450, 650) {
+        for w in (40, 90, 120) {
+          let key = "d" + str(d) + "w" + str(w)
+          ([#d], [#w], [#average(result.at(key))], [#calc-id(d, w)])
+        }
+      }
+    },
   ),
   caption: [各条件毎の平均選択時間 MT と ID]
 ) <t2>
