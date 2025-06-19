@@ -33,3 +33,4 @@ Linux hinoki 6.12.28_1 #1 SMP PREEMPT_DYNAMIC Sun May 11 04:22:51 UTC 2025 x86_
 
 #include "2-1.typ"
 
+#include "2-2.typ"
